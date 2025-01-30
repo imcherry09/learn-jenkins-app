@@ -19,5 +19,16 @@ pipeline{
                 '''
             }
         }
+        stage('Test'){
+            steps{
+                sh '''
+                if [-f $WORKSPACE/index.html]; then
+                echo "index.html found"
+                else 
+                echo "Index.html not found"
+                npm test
+                '''
+            }
+        }
     }
 }
