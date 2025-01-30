@@ -27,14 +27,7 @@ pipeline{
             steps{
                 sh '''
                 echo "Test Stage"
-                found_file=$(find "$WORKSPACE" -type f -name "index.html" | head -n 1)
-                if [-n $found_file]; then
-                echo "index.html found at" 
-                echo "$found_file"
-                else 
-                echo "index.html not found"
-                exit 1
-                fi
+                test -f build/index.html
                 npm test
                 '''
             }
