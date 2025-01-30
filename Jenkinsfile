@@ -10,12 +10,10 @@ pipeline{
             }
             steps{
                 sh '''
-                ls -la
                 node --version
                 npm --version 
                 npm ci
                 npm run build
-                ls -la
                 '''
             }
         }
@@ -29,10 +27,13 @@ pipeline{
             steps{
                 sh '''
                 echo "Test Stage"
-                if [-f $WORKSPACE/index.html]; then
-                echo "index.html found"
+                found_file=$(find "$WORKSPACE" -type f -name "index.html" | head -n 1)
+                if [-n $found_file]; then
+                echo "index.html found at" 
+                echo "$found_file"
                 else 
                 echo "index.html not found"
+                exit 1
                 fi
                 npm test
                 '''
