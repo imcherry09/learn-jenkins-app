@@ -22,10 +22,12 @@ pipeline{
         stage('Test'){
             steps{
                 sh '''
+                echo "Test Stage"
                 if [-f $WORKSPACE/index.html]; then
                 echo "index.html found"
                 else 
-                echo "Index.html not found"
+                echo "index.html not found"
+                fi
                 npm test
                 '''
             }
