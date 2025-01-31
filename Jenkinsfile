@@ -41,7 +41,7 @@ pipeline{
                 }
             }
             steps{
-                unstash 'build-files'
+        
         sh '''
         npm install serve
         nohup node_modules/.bin/serve -s build > serve.log 2>&1 &
