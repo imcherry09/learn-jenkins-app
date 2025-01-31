@@ -41,13 +41,10 @@ pipeline{
                 }
             }
             steps{
-        
         sh '''
         npm install serve
-        nohup node_modules/.bin/serve -s build > serve.log 2>&1 &
+        node_modules/.bin/serve -s build &
         sleep 10
-        npm ci
-        PLAYWRIGHT_BROWSERS_PATH=0 npx playwright install --with-deps
         npx playwright test --reporter=html
         '''
             }
