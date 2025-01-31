@@ -45,7 +45,8 @@ pipeline{
                 npm install serve
                 node_modules/.bin/serve -s build &
                 sleep 10
-                npx playwright install --with-deps
+                npm ci  # Ensure dependencies are installed
+                PLAYWRIGHT_BROWSERS_PATH=0 npx playwright install --with-deps --allow-root  # Install without root switch
                 npx playwright test --reporter=html
                 '''
             }
