@@ -66,6 +66,20 @@ pipeline{
                 }
                     }
         }
+        stage('Deploy'){
+            agent{
+                docker{
+                    image 'node:18-alpine'
+                }
+            }
+            steps{
+                sh '''
+                npm install netfliy-cli
+                node_modules/.bin/netfliy --version
+                '''
+            }
+            }
+        }
     }
     
 }
